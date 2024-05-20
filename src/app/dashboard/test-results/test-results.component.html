@@ -1,0 +1,51 @@
+<div class="p-4">
+  <!--
+        <p class="text-lg font-semibold mb-2">Test: {{ test?.id }}</p>
+        <p class="text-gray-700">Date: {{ test?.date | date : "medium" }}</p>
+    -->
+
+  <!-- Display test results -->
+  <div class="flex justify-between">
+    <p class="text-gray-700">Remaining: {{ test?.result?.remaining }}</p>
+    <p class="text-green-600">Correct: {{ test?.result?.correct }}</p>
+    <p class="text-red-600">Incorrect: {{ test?.result?.incorrect }}</p>
+  </div>
+
+  <div *ngIf="test">
+    <!-- Display question results -->
+    <div class="flex flex-wrap mt-4">
+      <div
+        *ngFor="let question of test.questions; let i = index"
+        class="w-1/10 p-1"
+      >
+        <div class="flex items-center justify-center">
+          <ng-container *ngIf="question.acertada !== undefined">
+            <a
+              [routerLink]="[
+                '/dashboard/test',
+                test.id,
+                'question',
+                question.id
+              ]"
+              class="w-6 h-6 rounded-full flex items-center justify-center text-white font-bold"
+              [ngClass]="{
+                'bg-green-500': question.acertada === true,
+                'bg-red-500': question.acertada === false,
+                'bg-gray-300': question.acertada === undefined
+              }"
+            >
+              {{ i + 1 }}
+            </a>
+          </ng-container>
+          <ng-container *ngIf="question.acertada === undefined">
+            <div
+              class="w-6 h-6 rounded-full flex items-center justify-center text-gray-500 font-bold"
+            >
+              {{ i + 1 }}
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

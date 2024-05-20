@@ -1,0 +1,61 @@
+<div class="bg-white rounded-lg shadow-md p-4 flex">
+  <div class="mr-4 flex items-center justify-center">
+    <img
+      [src]="'assets/images/A1/' + question?.img"
+      alt="Question"
+      class="max-h-200px"
+    />
+  </div>
+  <div class="flex flex-col justify-between">
+    <div class="mb-4">
+      <h4 class="text-lg font-bold">Pregunta</h4>
+      <p class="text-gray-800 mt-2">{{ question?.pregunta }}</p>
+    </div>
+    <div *ngIf="isQuestionAnswered()" class="text-gray-600 mb-4">
+      <h5 class="mb-2">Esta pregunta ya ha sido respondida.</h5>
+      <p class="mb-2">Explicación: {{ question?.explicacion }}</p>
+    </div>
+    <div *ngFor="let answer of question?.respuestas; let i = index">
+      <ng-container *ngIf="answer.trim() !== ''">
+        <div class="flex items-center mb-2">
+          <input
+            class="form-radio h-4 w-4 text-indigo-600"
+            type="radio"
+            [formControl]="questionForm"
+            [value]="answer"
+            [disabled]="isQuestionAnswered()"
+            name="answer"
+            id="answer{{ i }}"
+          />
+          <label
+            class="ml-2 text-gray-700 cursor-pointer"
+            [ngClass]="{
+              'bg-green-300':
+                isQuestionAnswered() && answer === question?.correcta,
+              'bg-red-300':
+                isQuestionAnswered() && answer !== question?.correcta
+            }"
+            [for]="'answer' + i"
+            >{{ answer }}</label
+          >
+        </div>
+      </ng-container>
+    </div>
+
+    <button
+      *ngIf="!isQuestionAnswered()"
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+      (click)="confirmAnswer()"
+      [disabled]="!questionForm.valid"
+    >
+      Responder
+    </button>
+    <button
+      *ngIf="isQuestionAnswered()"
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+      (click)="navigateToNextQuestion()"
+    >
+      Continuar test
+    </button>
+  </div>
+</div>

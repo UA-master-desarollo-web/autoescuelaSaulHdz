@@ -1,0 +1,31 @@
+<div class="container mx-auto">
+  <app-test-results></app-test-results>
+
+  <ng-container *ngIf="!testInProgress && !testCompleted">
+    <button
+      (click)="startTest()"
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+    >
+      Continue Test
+    </button>
+  </ng-container>
+
+  <ng-container *ngIf="testCompleted">
+    <h4 class="text-lg font-bold">Test Completed</h4>
+    <button
+      (click)="returnToDashboard()"
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+    >
+      return to test menu
+    </button>
+    <button
+      *ngIf="testInProgress"
+      (click)="reviewResults()"
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+    >
+      Review results
+    </button>
+  </ng-container>
+
+  <router-outlet></router-outlet>
+</div>

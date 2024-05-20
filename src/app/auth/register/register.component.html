@@ -1,0 +1,228 @@
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <h2
+      class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
+    >
+      Registro de usuarios
+    </h2>
+    <div class="mt-4 text-center">
+      <a routerLink="/" class="text-indigo-600 hover:text-indigo-500"
+        >Regresar</a
+      >
+    </div>
+  </div>
+
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <form
+      [formGroup]="registerForm"
+      (ngSubmit)="submitRegister()"
+      class="space-y-6"
+    >
+      <div class="mb-4">
+        <label
+          for="name"
+          class="block text-sm font-medium leading-6 text-gray-900"
+          >Nombre(s)</label
+        >
+        <div class="mt-2">
+          <input
+            type="text"
+            id="name"
+            name="name"
+            class="block w-full rounded-md border-0 px-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            required
+            formControlName="name"
+          />
+        </div>
+        <div
+          *ngIf="name?.invalid && name?.touched"
+          class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+          role="alert"
+        >
+          <div *ngIf="name?.errors?.['required']" class="text-sm">
+            El nombre es requerido.
+          </div>
+          <div *ngIf="name?.errors?.['minlength']" class="text-sm">
+            El nombre debe tener al menos 3 caracteres.
+          </div>
+          <div *ngIf="name?.errors?.['maxlength']" class="text-sm">
+            El nombre debe tener menos de 20 caracteres.
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label
+          for="lastname"
+          class="block text-sm font-medium leading-6 text-gray-900"
+          >Apellido(s)</label
+        >
+        <div class="mt-2">
+          <input
+            type="text"
+            id="lastname"
+            name="lastname"
+            class="block w-full rounded-md border-0 px-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            required
+            formControlName="lastname"
+          />
+        </div>
+        <div
+          *ngIf="lastname?.invalid && lastname?.touched"
+          class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+          role="alert"
+        >
+          <div *ngIf="lastname?.errors?.['required']" class="text-sm">
+            El apellido es requerido.
+          </div>
+          <div *ngIf="lastname?.errors?.['minlength']" class="text-sm">
+            El apellido debe tener al menos 3 caracteres.
+          </div>
+          <div *ngIf="lastname?.errors?.['maxlength']" class="text-sm">
+            El apellido debe tener menos de 20 caracteres.
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label
+          for="dni"
+          class="block text-sm font-medium leading-6 text-gray-900"
+          >DNI</label
+        >
+        <div class="mt-2">
+          <input
+            type="text"
+            id="dni"
+            name="dni"
+            class="block w-full rounded-md border-0 px-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            required
+            formControlName="DNI"
+          />
+        </div>
+        <div
+          *ngIf="DNI?.invalid && DNI?.touched"
+          class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+          role="alert"
+        >
+          <div *ngIf="DNI?.errors?.['required']" class="text-sm">
+            El DNI es requerido.
+          </div>
+          <div *ngIf="DNI?.errors?.['minlength']" class="text-sm">
+            El DNI debe tener 9 caracteres con formato a1234567b
+          </div>
+          <div *ngIf="DNI?.errors?.['maxlength']" class="text-sm">
+            El DNI debe tener 9 caracteres con formato a1234567b
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label
+          for="email"
+          class="block text-sm font-medium leading-6 text-gray-900"
+          >Correo electronico</label
+        >
+        <div class="mt-2">
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="block w-full rounded-md border-0 px-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            required
+            formControlName="email"
+          />
+        </div>
+        <div
+          *ngIf="email?.invalid && email?.touched"
+          class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+          role="alert"
+        >
+          <div *ngIf="email?.errors?.['required']" class="text-sm">
+            El correo electrónico es requerido.
+          </div>
+          <div *ngIf="email?.errors?.['email']" class="text-sm">
+            Por favor ingrese un correo electrónico válido.
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label
+          for="password"
+          class="block text-sm font-medium leading-6 text-gray-900"
+          >Contraseña</label
+        >
+        <div class="mt-2">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="block w-full rounded-md border-0 px-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            required
+            formControlName="password"
+          />
+        </div>
+        <div
+          *ngIf="password?.invalid && password?.touched"
+          class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+          role="alert"
+        >
+          <div *ngIf="password?.errors?.['required']" class="text-sm">
+            La contraseña es requerida.
+          </div>
+          <div *ngIf="password?.errors?.['minlength']" class="text-sm">
+            La contraseña debe tener al menos 8 caracteres.
+          </div>
+          <div *ngIf="password?.errors?.['maxlength']" class="text-sm">
+            La contraseña debe tener menos de 20 caracteres.
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label
+          for="confirmPassword"
+          class="block text-sm font-medium leading-6 text-gray-900"
+          >Confirmar contraseña</label
+        >
+        <div class="mt-2">
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            class="block w-full rounded-md border-0 px-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            required
+            formControlName="confirmPassword"
+          />
+        </div>
+        <div
+          *ngIf="confirmPassword?.invalid && confirmPassword?.touched"
+          class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+          role="alert"
+        >
+          <div *ngIf="confirmPassword?.errors?.['required']" class="text-sm">
+            La confirmación de la contraseña es requerida.
+          </div>
+          <div
+            *ngIf="confirmPassword?.errors?.['passwordMismatch']"
+            class="text-sm"
+          >
+            Las contraseñas no coinciden.
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button
+          type="submit"
+          [disabled]="!registerForm.valid"
+          [ngClass]="{ 'opacity-50 cursor-not-allowed': !registerForm.valid }"
+          class="flex w-full justify-center rounded-md bg-indigo-600 px-3 px-4 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          Registrar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
