@@ -1,0 +1,99 @@
+<div class="p-4">
+  <h2 class="text-xl font-bold mb-4">Available Tests</h2>
+
+  <!-- Grouping buttons -->
+  <div class="flex flex-wrap mb-4 space-x-2 space-x-4 space-y-4">
+    <button
+      (click)="clearTests()"
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+    >
+      Clear Test
+    </button>
+    <button
+      (click)="startNewTest()"
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+    >
+      Start New Test
+    </button>
+    <button
+      (click)="startNewTestFromMistakes()"
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+    >
+      Start New Test from Mistakes
+    </button>
+  </div>
+
+  <!-- Dividing tests by finished and unfinished -->
+  <div>
+    <h3 class="text-lg font-bold mb-2">Unfinished Tests</h3>
+    <ul>
+      <li
+        *ngFor="let test of unfinishedTests"
+        class="border-b border-gray-200 py-2 flex justify-between items-center"
+      >
+        <div>
+          <span class="text-gray-800">{{ test.id }}</span>
+        </div>
+        <div>
+          <span class="text-gray-600"
+            >Remaining: {{ test.result.remaining }}</span
+          >
+          <span class="text-gray-600 ml-2"
+            >Correct: {{ test.result.correct }}</span
+          >
+          <span class="text-gray-600 ml-2"
+            >Incorrect: {{ test.result.incorrect }}</span
+          >
+          <span class="text-gray-600 ml-2"
+            >Grade:
+            {{
+              test.result.correct /
+                (test.result.correct + test.result.incorrect) | percent
+            }}</span
+          >
+          <button
+            (click)="continueTest(test)"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4"
+          >
+            {{ test.result.remaining ? "Continue" : "Review" }}
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div>
+    <h3 class="text-lg font-bold my-2">Finished Tests</h3>
+    <ul>
+      <li
+        *ngFor="let test of finishedTests"
+        class="border-b border-gray-200 py-2 flex justify-between items-center"
+      >
+        <div>
+          <span class="text-gray-800">{{ test.id }}</span>
+        </div>
+        <div>
+          <span class="text-gray-600">Correct: {{ test.result.correct }}</span>
+          <span class="text-gray-600 ml-2"
+            >Incorrect: {{ test.result.incorrect }}</span
+          >
+          <button
+            (click)="reviewTest(test)"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4"
+          >
+            Review
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Display message if no tests available -->
+  <ng-container
+    *ngIf="unfinishedTests.length === 0 && finishedTests.length === 0"
+  >
+    <p class="text-gray-600 mt-4">No tests available.</p>
+  </ng-container>
+
+  <router-outlet></router-outlet>
+</div>

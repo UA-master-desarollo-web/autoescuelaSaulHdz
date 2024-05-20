@@ -1,0 +1,19 @@
+<div
+  *ngFor="let toast of toasts; index as i"
+  [ngClass]="{
+    'bg-red-100 border-red-500 text-red-900': toast.status === 'error',
+    'bg-green-100 border-green-500 text-green-900': toast.status === 'success'
+  }"
+  class="border-t-4 rounded-b px-4 py-3 shadow-md fixed bottom-0 right-0 m-4"
+  role="alert"
+  [style.bottom.px]="i * 75"
+>
+  <div class="flex">
+    <div>
+      <p class="font-bold">{{ toast.title }}</p>
+      <p class="text-sm">
+        {{ toast.text }}
+      </p>
+    </div>
+  </div>
+</div>
